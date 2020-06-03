@@ -71,7 +71,7 @@ div.App {
 }
 
 .unread-notifications {
-  max-width: 700px;
+  max-width: 450px;
   padding: 0;
   list-style: none;
 }
@@ -79,8 +79,9 @@ div.App {
 .unread-notifications li {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  padding: 5px 40px 5px 20px;
+  padding: 0px 50px 15px 20px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   margin-bottom: 4px;
@@ -120,4 +121,11 @@ div.App {
 .archive-button:hover {
   opacity: 0.7;
   transform: scale(1.1);
+}
+
+.icon-eq-notif {
+  position: absolute;
+  top: 10px;
+  right: 7px;
+  width: 30px;
 }

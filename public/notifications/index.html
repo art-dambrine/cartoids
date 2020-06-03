@@ -69,91 +69,136 @@
       <div class="canvas-notifications" id="canvas-notifications">
         <!-- Ici nos notificactions -->
         <h3>Notifications récentes</h3>
-        <ul class="unread-notifications">
-          <li class="notif-li">
-            <div class="notif-content">
-              Notif : SUD_DSLMKJ_LMSDKJ_1232175645 <br />
-              Secteur : ucun <br />
-              Nom : Electricite - inter, fils, deriv.. <br />
-              Etat : solved <br />
-              Lu : non-lu <br />
-              Message <br />
-              timereceived <br />
-            </div>
-            <div class="notif-bubble"></div>
-            <a href=""><img class="archive-button" src="archive_icon.png" /></a>
-          </li>
-        </ul>
+        <ul class="unread-notifications" id="unread-notifications"></ul>
 
         <h3>Notifications archivées</h3>
-
-        <ul class="unread-notifications read-notifications">
-          <li>
-            Notif : SUD_DSLMKJ_LMSDKJ_1232175645 <br />
-            Secteur : ucun <br />
-            Nom : Electricite - inter, fils, deriv.. <br />
-            Etat : solved <br />
-            Lu : non-lu <br />
-            Message <br />
-            timereceived <br />
-          </li>
-          <li>
-            Notif : SUD_DSLMKJ_LMSDKJ_1232175645 <br />
-            Secteur : ucun <br />
-            Nom : Electricite - inter, fils, deriv.. <br />
-            Etat : solved <br />
-            Lu : non-lu <br />
-            Message <br />
-            timereceived <br />
-          </li>
-          <li>
-            Notif : SUD_DSLMKJ_LMSDKJ_1232175645 <br />
-            Secteur : ucun <br />
-            Nom : Electricite - inter, fils, deriv.. <br />
-            Etat : solved <br />
-            Lu : non-lu <br />
-            Message <br />
-            timereceived <br />
+        <ul
+          class="unread-notifications read-notifications"
+          id="read-notifications"
+        >
+          <li class="notif-li">
+            <div class="notif-content">
+              <img
+                src="../img/DEFAULT_ico.png"
+                alt="icon"
+                class="icon-eq-notif"
+              />
+              <span hidden id="id_notif"
+                >AVRE_1020_20B_BC_0_ELECTR1590500046003</span
+              >
+              <span hidden id="id_equipement">AVRE_1020_20B_BC_0_ELECTR</span
+              ><br />
+              Equipement: Electricite - inter, fils, deriv.. <br />
+              Secteur: AVRE <br />
+              Etat: solved <br />
+              Message: résolu <br />
+              Time: 1590500046003 <br />
+            </div>
           </li>
         </ul>
       </div>
     </main>
 
-    <!-- <script>
-  var requestOptions = {
-    method: "GET",
-    redirect: "follow",
-  };
+    <script>
+      var requestOptions = {
+        method: "GET",
+        redirect: "follow",
+      };
 
-  fetch(
-    "http://docker.art-dambrine.ovh:1026/v2/entities?type=notification&options=count",
-    requestOptions
-  )
-    .then((response) => response.text())
-    .then(function (myText) {
-      const canvas = document.getElementById("canvas-notifications");
+      fetch(
+        "http://docker.art-dambrine.ovh:1026/v2/entities?type=notification&options=count",
+        requestOptions
+      )
+        .then((response) => response.text())
+        .then(function (myText) {
+          const unread_notifications = document.getElementById(
+            "unread-notifications"
+          );
 
-      // Parse JSON here and get notifications :
-      const json = myText;
-      const obj = JSON.parse(json);
+          const read_notifications = document.getElementById(
+            "read-notifications"
+          );
 
-      console.log(myText);
+          // Parse JSON here and get notifications :
+          const json = myText;
+          const obj = JSON.parse(json);
 
-      var html = "";
+          console.log(myText);
 
-      html += "<table>\n" + "  <tr>";
+          for (i = 0; i < obj.length; i++) {
+            var type_equipement = obj[i].idequipement.value.substr(
+              obj[i].idequipement.value.lastIndexOf("_") + 1,
+              obj[i].idequipement.value.length
+            );
 
-      for (i = 0; i < obj.length; i++) {
-        html += "<td>" + obj[i].id + "<td>";
-        html += "</tr><tr>";
-        html += "<td>" + obj[i].etat.value + "<td>";
-      }
-      html += "  </tr>  \n" + "</table>";
+            if (obj[i].lu.value === false) {
+              /* Affichage de notif unread */
+              unread_notifications.innerHTML +=
+                '<li class="notif-li">\n' +
+                '            <div class="notif-content">\n' +
+                "              <img\n" +
+                '                src="../img/' +
+                type_equipement +
+                '_ico.png"\n' +
+                '                alt="ico"\n' +
+                '                class="icon-eq-notif"\n' +
+                "              />\n" +
+                '              <span hidden id="id_notif"\n' +
+                "                >" +
+                obj[i].idequipement.value +
+                "</span\n" +
+                "              >\n" +
+                '              <span hidden id="id_equipement">' +
+                obj[i].idequipement.value +
+                "</span\n" +
+                "              ><br />\n" +
+                "              Equipement: " +
+                obj[i].name.value +
+                " <br />\n" +
+                "              Secteur: " +
+                obj[i].ucun.value +
+                " <br />\n" +
+                "              Etat: " +
+                obj[i].etat.value +
+                " <br />\n" +
+                "              Message: " +
+                obj[i].message.value +
+                " <br />\n" +
+                "              Time: " +
+                obj[i].timereceived.value +
+                " <br />\n" +
+                "            </div>\n" +
+                '            <div class="notif-bubble"></div>\n' +
+                '            <a href=""><img class="archive-button" src="archive_icon.png" /></a>\n' +
+                "          </li>";
+            } else {
+              /* Affichage de notif read-archived */
 
-      canvas.innerHTML = html;
-    })
-    .catch((error) => console.log("error", error));
-</script> -->
+              read_notifications.innerHTML +=
+                '<li class="notif-li">\n' +
+                '            <div class="notif-content">\n' +
+                "              <img\n" +
+                '                src="../img/DEFAULT_ico.png"\n' +
+                '                alt="icon"\n' +
+                '                class="icon-eq-notif"\n' +
+                "              />\n" +
+                '              <span hidden id="id_notif"\n' +
+                "                >AVRE_1020_20B_BC_0_ELECTR1590500046003</span\n" +
+                "              >\n" +
+                '              <span hidden id="id_equipement">AVRE_1020_20B_BC_0_ELECTR</span\n' +
+                "              ><br />\n" +
+                "              Equipement: Electricite - inter, fils, deriv.. <br />\n" +
+                "              Secteur: AVRE <br />\n" +
+                "              Etat: solved <br />\n" +
+                "              Message: résolu <br />\n" +
+                "              Time: 1590500046003 <br />\n" +
+                "            </div>\n" +
+                "          </li>";
+            }
+          }
+        })
+        .catch((error) => console.log("error", error));
+    </script>
 
     <!-- Bootstrap JS -->
     <script
