@@ -17,64 +17,107 @@ div.App {
   position: relative;
   z-index: 2;
   height: calc(100vh - 56px) !important;
-  width: calc(100vw - 200px);
   box-shadow: 2px 0 2px rgba(0, 0, 0, 0.2);
-}
-
-.notif-container {
-  position: absolute;
-  top: 56px;
-  right: 0;
-  z-index: 2;
-
-  display: flex;
-  max-width: 200px;
-  overflow-wrap: anywhere;
-
-  background: lightgrey;
 }
 
 /* CSS notifications.html */
 
-.list-notif {
-  list-style: none;
-  overflow-y: auto;
-  margin: 0;
-  padding: 0;
-  max-height: calc(100vh - 56px);
-}
-
-.list-notif li {
-  display: flex;
-  justify-content: space-between;
-  text-align: justify;
-  font-size: 0.8em;
-  margin: 0 0 2px 0;
-  border-radius: 2px;
-  padding: 10px;
-  opacity: 0.8;
-
-  background-color: rgb(241, 241, 241);
-
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-/* .list-notif li:after {
-  content:'';
-  position: absolute;
+.header .nav-notif {
+  position: fixed;
   top: 0;
-  right:0;
   left: 0;
-  height: 1px;
-  background: black;
-} */
-
-.list-notif li:hover {
-  opacity: 1;
-  background: rgba(0, 0, 0, 0.2);
+  right: 0;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 }
 
-.notif-cross {
-  height: 1.1em;
-  margin-left: 5px;
+.notification-label-nav {
+  position: relative;
+}
+.header .notification-counter {
+  position: absolute;
+  top: -15px;
+  right: -25px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: rgba(43, 162, 231, 0.8);
+  color: white;
+  transform: scale(0.6);
+  font-weight: bold;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.header .notification-counter:hover {
+  transform: scale(0.62);
+}
+
+.navbar-toggler[aria-expanded="true"] .notification-counter {
+  display: none;
+}
+
+.navbar-toggler[aria-expanded="false"] .notification-counter {
+  display: block;
+  transform: translate(-100px, 25px) scale(0.7);
+}
+
+/* CSS Page notification */
+
+.main-notif {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 54px auto;
+  padding: 20px;
+  margin-bottom: 0;
+}
+
+.unread-notifications {
+  max-width: 700px;
+  padding: 0;
+  list-style: none;
+}
+
+.unread-notifications li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 5px 40px 5px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  margin-bottom: 4px;
+
+  background-color: rgba(236, 236, 236, 0.2);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+
+  font-family: "Roboto", sans-serif;
+}
+
+.unread-notifications li:hover {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.read-notifications li {
+  background-color: rgba(236, 236, 236, 0.8);
+}
+
+.notif-bubble {
+  padding: 5px;
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+  background: rgb(43, 162, 231);
+  position: absolute;
+  right: 17px;
+}
+
+.archive-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 20px;
+  opacity: 0.5;
+}
+
+.archive-button:hover {
+  opacity: 0.7;
+  transform: scale(1.1);
 }
