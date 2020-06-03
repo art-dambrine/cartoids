@@ -20,10 +20,10 @@ export default class MapGeneratorService {
     });
   }
 
-  static FetchHeadlines(url: string): Promise<any> {
+  static async FetchHeadlines(url: string): Promise<any> {
     console.log("Entered FetchHeadlines");
 
-    return this.get(url)
+    return await this.get(url)
       .then()
       .catch((error) => {
         console.log("getJSON failed for", url, error);

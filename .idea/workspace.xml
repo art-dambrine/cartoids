@@ -2,21 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5c0ae4dc-c9d1-4a8c-93bf-deb4631ff2d9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/CartoIDS.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CartoIDS.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MapGenerator/Card.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MapGenerator.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MapGenerator.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MapGenerator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MapGenerator.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PopupMarker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupMarker.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MapGenerator.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MapGenerator/MapGenerator.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MapGenerator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MapGenerator/MapGenerator.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PopupMarker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MapGenerator/PopupMarker.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/MapGeneratorController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/MapGeneratorController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/IEntity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/IEntity.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/MapGeneratorService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/MapGeneratorService.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,6 +21,7 @@
       <list>
         <option value="TypeScript File" />
         <option value="JavaScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -59,6 +52,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ronyd\Desktop\CartoIDS\src\components\MapGenerator" />
       <recent name="C:\Users\ronyd\Desktop\CartoIDS\src" />
       <recent name="C:\Users\ronyd\Desktop\CartoIDS\src\component" />
     </key>
@@ -96,12 +90,26 @@
       <workItem from="1589981550651" duration="171000" />
       <workItem from="1590491396417" duration="11197000" />
       <workItem from="1590937517805" duration="26001000" />
-      <workItem from="1591095732746" duration="7427000" />
+      <workItem from="1591095732746" duration="20929000" />
+      <workItem from="1591119519429" duration="5627000" />
+      <workItem from="1591180017333" duration="6566000" />
     </task>
+    <task id="LOCAL-00001" summary="Missing files">
+      <created>1591105221690</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1591105221691</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Missing files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Missing files" />
   </component>
   <component name="WindowStateProjectService">
     <state x="495" y="215" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1591046837160">
@@ -112,6 +120,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1591046670636" />
+    <state x="393" y="7" key="CommitChangelistDialog2" timestamp="1591105208108">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="393" y="7" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1591105208108" />
     <state x="437" y="159" width="660" height="665" key="EditFileWatcherDialog" timestamp="1591042717028">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -132,10 +144,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1536.824@0.0.1536.824" timestamp="1591056918656" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1591105267550">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1591105267550" />
     <state x="463" y="144" width="609" height="536" key="find.popup" timestamp="1589551733132">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="463" y="144" width="609" height="536" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1589551733132" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1591193178131">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1591193178131" />
     <state x="360" y="71" key="scopes" timestamp="1589551619971">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

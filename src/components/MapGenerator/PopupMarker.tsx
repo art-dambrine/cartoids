@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Marker, Popup } from "react-leaflet";
 import { LatLngTuple } from "leaflet";
-import IEntity from "../models/IEntity";
+import IEntity from "../../models/IEntity";
 
 interface IProps {
   entity: IEntity;
@@ -14,8 +14,10 @@ export default class PopupMarker extends Component<IProps> {
 
   render() {
     const { entity } = this.props;
-    const position: LatLngTuple = entity.location.value.coordinates;
-    console.log("position", position);
+    const position: LatLngTuple = [
+      entity.location.value.coordinates[1],
+      entity.location.value.coordinates[0],
+    ];
     return (
       <Marker position={position}>
         <Popup>
