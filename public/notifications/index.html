@@ -75,27 +75,7 @@
         <ul
           class="unread-notifications read-notifications"
           id="read-notifications"
-        >
-          <li class="notif-li">
-            <div class="notif-content">
-              <img
-                src="../img/DEFAULT_ico.png"
-                alt="icon"
-                class="icon-eq-notif"
-              />
-              <span hidden id="id_notif"
-                >AVRE_1020_20B_BC_0_ELECTR1590500046003</span
-              >
-              <span hidden id="id_equipement">AVRE_1020_20B_BC_0_ELECTR</span
-              ><br />
-              Equipement: Electricite - inter, fils, deriv.. <br />
-              Secteur: AVRE <br />
-              Etat: solved <br />
-              Message: résolu <br />
-              Time: 1590500046003 <br />
-            </div>
-          </li>
-        </ul>
+        ></ul>
       </div>
     </main>
 
@@ -123,9 +103,9 @@
           const json = myText;
           const obj = JSON.parse(json);
 
-          console.log(myText);
+          /*console.log(myText);*/
 
-          for (i = 0; i < obj.length; i++) {
+          for (i = obj.length - 1; i >= 0; i--) {
             var type_equipement = obj[i].idequipement.value.substr(
               obj[i].idequipement.value.lastIndexOf("_") + 1,
               obj[i].idequipement.value.length
@@ -145,7 +125,7 @@
                 "              />\n" +
                 '              <span hidden id="id_notif"\n' +
                 "                >" +
-                obj[i].idequipement.value +
+                obj[i].id +
                 "</span\n" +
                 "              >\n" +
                 '              <span hidden id="id_equipement">' +
@@ -169,35 +149,112 @@
                 " <br />\n" +
                 "            </div>\n" +
                 '            <div class="notif-bubble"></div>\n' +
-                '            <a href=""><img class="archive-button" src="archive_icon.png" /></a>\n' +
+                '            <a onclick="mark_as_read(this.id)" class="archive-button-js" id="' +
+                obj[i].id +
+                '"><img class="archive-button" src="archive_icon.png" /></a>\n' +
                 "          </li>";
             } else {
               /* Affichage de notif read-archived */
 
               read_notifications.innerHTML +=
-                '<li class="notif-li">\n' +
+                '<li class="notif-li" id="li-' +
+                obj[i].id +
+                '">\n' +
                 '            <div class="notif-content">\n' +
                 "              <img\n" +
-                '                src="../img/DEFAULT_ico.png"\n' +
+                '                src="../img/' +
+                type_equipement +
+                '_ico.png"\n' +
                 '                alt="icon"\n' +
                 '                class="icon-eq-notif"\n' +
                 "              />\n" +
                 '              <span hidden id="id_notif"\n' +
-                "                >AVRE_1020_20B_BC_0_ELECTR1590500046003</span\n" +
+                "                >" +
+                obj[i].id +
+                "</span\n" +
                 "              >\n" +
-                '              <span hidden id="id_equipement">AVRE_1020_20B_BC_0_ELECTR</span\n' +
+                '              <span hidden id="id_equipement">' +
+                obj[i].idequipement.value +
+                "</span\n" +
                 "              ><br />\n" +
-                "              Equipement: Electricite - inter, fils, deriv.. <br />\n" +
-                "              Secteur: AVRE <br />\n" +
-                "              Etat: solved <br />\n" +
-                "              Message: résolu <br />\n" +
-                "              Time: 1590500046003 <br />\n" +
+                "              Equipement: " +
+                obj[i].name.value +
+                " <br />\n" +
+                "              Secteur: " +
+                obj[i].ucun.value +
+                " <br />\n" +
+                "              Etat: " +
+                obj[i].etat.value +
+                " <br />\n" +
+                "              Message: " +
+                obj[i].message.value +
+                " <br />\n" +
+                "              Time: " +
+                obj[i].timereceived.value +
+                " <br />\n" +
                 "            </div>\n" +
+                '            <a onclick="delete_notif(this.id)" class="archive-button-js" id="' +
+                obj[i].id +
+                '"><img class="archive-button" src="delete_icon.png" /></a>\n' +
                 "          </li>";
             }
           }
         })
         .catch((error) => console.log("error", error));
+
+      function reload_page() {
+        document.location.reload();
+      }
+
+      function mark_as_read(id_notif) {
+        /*console.log(id_notif);*/
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "text/plain");
+
+        var raw = "true";
+
+        var requestOptions = {
+          method: "PUT",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+
+        fetch(
+          "http://docker.art-dambrine.ovh:1026/v2/entities/" +
+            id_notif +
+            "/attrs/lu/value",
+          requestOptions
+        )
+          .then((response) => response.text())
+          /*.then((result) => console.log(result))*/
+          .catch((error) => console.log("error", error));
+
+        setTimeout(reload_page, 250);
+      }
+
+      function delete_notif(id_notif) {
+        /*console.log(id_notif);*/
+
+        var requestOptions = {
+          method: "DELETE",
+          redirect: "follow",
+        };
+
+        fetch(
+          "http://docker.art-dambrine.ovh:1026/v2/entities/" + id_notif + "",
+          requestOptions
+        )
+          .then((response) => response.text())
+          /*.then((result) => console.log(result))*/
+          .catch((error) => console.log("error", error));
+
+        // Supprime un élément spécifié quand son noeud parent est connu
+        var d = document.getElementById("read-notifications");
+        var d_nested = document.getElementById("li-" + id_notif);
+        var throwawayNode = d.removeChild(d_nested);
+      }
     </script>
 
     <!-- Bootstrap JS -->
