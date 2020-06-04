@@ -1,0 +1,12 @@
+.cardContainer {
+  border-bottom: 1px dashed;
+}
+.cardContainer .cardTitle {
+  size: 24px;
+  font-style: normal;
+  font-weight: bold;
+}
+.cardContainer .cardImg {
+  float: right;
+  height: 35px;
+}

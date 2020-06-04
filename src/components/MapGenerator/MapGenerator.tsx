@@ -8,13 +8,17 @@ import * as _ from "lodash";
 import MapGeneratorController from "../../controllers/MapGeneratorController";
 import IEntity from "../../models/IEntity";
 
-import PopupMarker from "./PopupMarker";
+import PopupMarker from "./PopupMarker/PopupMarker";
 
 interface IProps {}
 
 interface IState {
   entities: IEntity[];
   zoom: number;
+}
+
+interface ICoordinates {
+  coordinates: [number, number];
 }
 
 export default class MapGenerator extends Component<IProps, IState> {
@@ -35,26 +39,55 @@ export default class MapGenerator extends Component<IProps, IState> {
     });
   }
 
-  componentDidUpdate(
-    prevProps: Readonly<IProps>,
-    prevState: Readonly<IState>,
-    snapshot?: any
-  ): void {
-    console.log("******");
+  getEntitiesGroups(entities: IEntity[]) {
+    const coordinatesFound: ICoordinates[] = [];
+    return _.map(entities, (entity: IEntity, key: string) => {
+      if (
+        this.checkIfCoordinatesExist(coordinatesFound, entity.location.value)
+      ) {
+        return;
+      }
+      coordinatesFound.push(entity.location.value);
+      const newEntities: IEntity[] = _.filter(entities, (e) => {
+        return this.compareEntityCoordinates(
+          entity.location.value,
+          e.location.value
+        );
+      }) as IEntity[];
+      return <PopupMarker entities={newEntities} key={key} />;
+    });
+  }
+
+  checkIfCoordinatesExist(
+    coordinators: ICoordinates[],
+    coordinates: ICoordinates
+  ): boolean {
+    for (let coordinator of coordinators) {
+      if (this.compareEntityCoordinates(coordinator, coordinates)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  compareEntityCoordinates(
+    coordinates: ICoordinates,
+    coordinator: ICoordinates
+  ): boolean {
+    const a = JSON.stringify(coordinates.coordinates);
+    const b = JSON.stringify(coordinator.coordinates);
+    return a === b;
   }
 
   render() {
     const { entities, zoom } = this.state;
-    console.log("---", entities);
     return (
       <Map center={[49.894067, 2.295753]} zoom={zoom}>
         <TileLayer
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {_.map(entities, (entity: IEntity, key: string) => (
-          <PopupMarker entity={entity} key={key} />
-        ))}
+        {this.getEntitiesGroups(entities)}
       </Map>
     );
   }
