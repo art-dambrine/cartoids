@@ -23,9 +23,19 @@ export default class Cards extends Component<IProps> {
   getCardImg(entity: IEntity): string {
     return "img/" + entity.code.value + "_ico.png";
   }
-  timestampToDate(timestamp: number): string {
-    const data: Date = new Date(timestamp);
-    return "";
+  timestampToDate(utcDate: string): string {
+    const date: Date = new Date(utcDate);
+    return (
+      date.getDay() +
+      "/" +
+      (date.getMonth() + 1) +
+      "/" +
+      date.getFullYear() +
+      " à " +
+      date.getHours() +
+      "h" +
+      date.getMinutes()
+    );
   }
 
   parseToCardDatas(entity: IEntity) {
@@ -37,6 +47,10 @@ export default class Cards extends Component<IProps> {
       {
         title: "Commentaire:",
         value: entity.commentaire.value,
+      },
+      {
+        title: "Heure d'enregistrement",
+        value: this.timestampToDate(entity.date.value),
       },
       {
         title: "Résidence:",
@@ -56,7 +70,10 @@ export default class Cards extends Component<IProps> {
       },
       {
         title: "Étage d'intervention:",
-        value: entity.numeroetage.value,
+        value:
+          parseInt(entity.numeroetage.value) === 0
+            ? "RDC"
+            : entity.numeroetage.value,
       },
       {
         title: "Nombre d'étages:",
@@ -67,7 +84,7 @@ export default class Cards extends Component<IProps> {
         value: entity.nomgardien.value,
       },
       {
-        title: "Nom du gardien:",
+        title: "Numéro de téléphone du gardien:",
         value: "+33" + entity.telgardien.value,
       },
     ];
