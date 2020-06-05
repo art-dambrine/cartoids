@@ -23,9 +23,21 @@ export default class Cards extends Component<IProps> {
   getCardImg(entity: IEntity): string {
     return "img/" + entity.code.value + "_ico.png";
   }
+  timestampToDate(timestamp: number): string {
+    const data: Date = new Date(timestamp);
+    return "";
+  }
 
   parseToCardDatas(entity: IEntity) {
     const cardDatas: ICard[] = [
+      {
+        title: "Type d'équipments concernés:",
+        value: entity.name.value,
+      },
+      {
+        title: "Commentaire:",
+        value: entity.commentaire.value,
+      },
       {
         title: "Résidence:",
         value: entity.adresse.value.residence,
@@ -33,6 +45,18 @@ export default class Cards extends Component<IProps> {
       {
         title: "Adresse:",
         value: entity.adresse.value.adresse,
+      },
+      {
+        title: "Secteur:",
+        value: entity.adresse.value.ucun,
+      },
+      {
+        title: "Entrée:",
+        value: entity.adresse.value.entree,
+      },
+      {
+        title: "Étage d'intervention:",
+        value: entity.numeroetage.value,
       },
       {
         title: "Nombre d'étages:",
@@ -43,8 +67,8 @@ export default class Cards extends Component<IProps> {
         value: entity.nomgardien.value,
       },
       {
-        title: "Type d'équipments concernés:",
-        value: entity.name.value,
+        title: "Nom du gardien:",
+        value: "+33" + entity.telgardien.value,
       },
     ];
     return cardDatas;
