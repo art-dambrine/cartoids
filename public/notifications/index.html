@@ -87,7 +87,7 @@
       };
 
       fetch(
-        "http://docker.art-dambrine.ovh:1026/v2/entities?type=notification&options=count&q=lu==false",
+        "https://api.art-dambrine.ovh/v2/entities?type=notification&options=count&q=lu==false",
         requestOptions
       )
         .then((response) => response.text())
@@ -113,7 +113,7 @@
       };
 
       fetch(
-        "http://docker.art-dambrine.ovh:1026/v2/entities?type=notification&options=count",
+        "https://api.art-dambrine.ovh/v2/entities?type=notification&options=count",
         requestOptions
       )
         .then((response) => response.text())
@@ -249,7 +249,7 @@
         };
 
         fetch(
-          "http://docker.art-dambrine.ovh:1026/v2/entities/" +
+          "https://api.art-dambrine.ovh/v2/entities/" +
             id_notif +
             "/attrs/lu/value",
           requestOptions
@@ -270,7 +270,7 @@
         };
 
         fetch(
-          "http://docker.art-dambrine.ovh:1026/v2/entities/" + id_notif + "",
+          "https://api.art-dambrine.ovh/v2/entities/" + id_notif + "",
           requestOptions
         )
           .then((response) => response.text())
