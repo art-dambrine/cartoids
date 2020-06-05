@@ -40,7 +40,7 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="notification-counter">23</span>
+          <span class="notification-counter"></span>
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -52,9 +52,8 @@
               <a class="nav-link push-right" href="../notifications">
                 <span class="notification-label-nav"
                   >Notifications
-                  <span class="notification-counter">23</span></span
-                ></a
-              >
+                  <span class="notification-counter"></span></span
+              ></a>
             </li>
           </ul>
         </div>
@@ -78,6 +77,34 @@
         ></ul>
       </div>
     </main>
+
+    <script>
+      /* notification-counter */
+
+      var requestOptions = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      fetch(
+        "http://docker.art-dambrine.ovh:1026/v2/entities?type=notification&options=count&q=lu==false",
+        requestOptions
+      )
+        .then((response) => response.text())
+        .then(function (result) {
+          const obj = JSON.parse(result);
+
+          const unread_notifications_counter = document.getElementsByClassName(
+            "notification-counter"
+          );
+
+          var html = "" + obj.length;
+
+          unread_notifications_counter[0].innerHTML += html;
+          unread_notifications_counter[1].innerHTML += html;
+        })
+        .catch((error) => console.log("error", error));
+    </script>
 
     <script>
       var requestOptions = {
