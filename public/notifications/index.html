@@ -107,6 +107,21 @@
     </script>
 
     <script>
+      function timestampToDate(utcDate) {
+        const date = new Date(utcDate);
+        return (
+          date.getDay() +
+          "/" +
+          (date.getMonth() + 1) +
+          "/" +
+          date.getFullYear() +
+          " à " +
+          date.getHours() +
+          "h" +
+          date.getMinutes()
+        );
+      }
+
       var requestOptions = {
         method: "GET",
         redirect: "follow",
@@ -171,8 +186,8 @@
                 "              Message: " +
                 obj[i].message.value +
                 " <br />\n" +
-                "              Time: " +
-                obj[i].timereceived.value +
+                "              Date: " +
+                timestampToDate(parseInt(obj[i].timereceived.value)) +
                 " <br />\n" +
                 "            </div>\n" +
                 '            <div class="notif-bubble"></div>\n' +
@@ -216,8 +231,8 @@
                 "              Message: " +
                 obj[i].message.value +
                 " <br />\n" +
-                "              Time: " +
-                obj[i].timereceived.value +
+                "              Date: " +
+                timestampToDate(parseInt(obj[i].timereceived.value)) +
                 " <br />\n" +
                 "            </div>\n" +
                 '            <a onclick="delete_notif(this.id)" class="archive-button-js" id="' +
